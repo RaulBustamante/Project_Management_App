@@ -1,0 +1,157 @@
+/* static/style.css */
+
+/* General Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.container {
+    max-width: 90%;
+    margin: auto;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #343a40;
+    padding-top: 20px;
+}
+
+.sidebar img {
+    display: block;
+    margin: 0 auto 20px;
+    width: 100px;
+    height: auto;
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #f8f9fa;
+    display: block;
+}
+
+.sidebar a:hover {
+    background-color: #575d63;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 16px;
+}
+
+.task-table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    font-size: 12px; /* Reduce the font size for smaller table cells */
+}
+
+.task-table th, .task-table td {
+    border: 1px solid #ddd;
+    padding: 4px; /* Reduce padding for smaller table cells */
+    text-align: center;
+}
+
+.task-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.task-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Add Task Form */
+.add-task-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.add-task-form .form-group label {
+    font-size: 14px;
+}
+
+.add-task-form .form-group input,
+.add-task-form .form-group select,
+.add-task-form .form-group textarea {
+    font-size: 14px;
+}
+
+.add-task-form button {
+    font-size: 16px;
+}
+
+/* Button Styles */
+.btn {
+    padding: 5px 10px;
+    font-size: 12px; /* Reduce button font size */
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.hide-completed {
+    display: none;
+}
+
+.show-completed {
+    display: block;
+}
+
+/* Scrollbars */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMastery</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        <a href="/">Inicio</a>
+        <a href="/statistics">Estadísticas</a>
+        <a href="/settings">Configuración</a>
+        <a href="/help">Ayuda</a>
+    </div>
+    <div class="main-content">
+        <div class="container">
+            <h1>TASK MASTERY</h1>
+            <button class="btn btn-primary mb-4" onclick="window.location.href='/add'">Añadir Tarea</button>
+            
+            <h2>Tareas sin Iniciar</h2>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Date</th>
+                        <th>Proactive</th>
+                        <th>Project</th>
+                        <th>Priority</th>
+                        <th>Category</th>
+                        <th>Importance</th>
+                        <th>Urgency</th>
+                        <th>Action to Take</th>
+                        <th>Activity Type</th>
+                        <th>Mental Focus</th>
+                        <th>Delegate</th>
+                        <th>Was Delegated</th>
+                        <th>Due Date</th>
+                        <th>Task Arrived</th>
+                        <th>Comments</th>
+                        <th>Status</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks_not_started %}
+                    <tr>
+                        <td>{{ task.day }}</td>
+                        <td>{{ task.date }}</td>
+                        <td>{{ task.proactive }}</td>
+                        <td>{{ task.project.name }}</td>
+                        <td>{{ task.priority.importance }}</td>
+                        <td>{{ task.category.name }}</td>
+                        <td>{{ task.importance.name }}</td>
+                        <td>{{ task.urgency.urgency_level }}</td>
+                        <td>{{ task.action_to_take }}</td>
+                        <td>{{ task.activity_type.activities }}</td>
+                        <td>{{ task.mental_focus.name }}</td>
+                        <td>{{ task.delegate }}</td>
+                        <td>{{ task.was_delegated }}</td>
+                        <td>{{ task.due_date }}</td>
+                        <td>{{ task.task_arrived }}</td>
+                        <td>{{ task.comments }}</td>
+                        <td>{{ task.status }}</td>
+                        <td>
+                            <a href="{{ url_for('start_task', task_id=task.id) }}" class="btn btn-warning">Iniciar</a>
+                            <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h2>Tareas en Progreso</h2>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Date</th>
+                        <th>Proactive</th>
+                        <th>Project</th>
+                        <th>Priority</th>
+                        <th>Category</th>
+                        <th>Importance</th>
+                        <th>Urgency</th>
+                        <th>Action to Take</th>
+                        <th>Activity Type</th>
+                        <th>Mental Focus</th>
+                        <th>Delegate</th>
+                        <th>Was Delegated</th>
+                        <th>Due Date</th>
+                        <th>Task Arrived</th>
+                        <th>Started</th>
+                        <th>Comments</th>
+                        <th>Status</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks_in_progress %}
+                    <tr>
+                        <td>{{ task.day }}</td>
+                        <td>{{ task.date }}</td>
+                        <td>{{ task.proactive }}</td>
+                        <td>{{ task.project.name }}</td>
+                        <td>{{ task.priority.importance }}</td>
+                        <td>{{ task.category.name }}</td>
+                        <td>{{ task.importance.name }}</td>
+                        <td>{{ task.urgency.urgency_level }}</td>
+                        <td>{{ task.action_to_take }}</td>
+                        <td>{{ task.activity_type.activities }}</td>
+                        <td>{{ task.mental_focus.name }}</td>
+                        <td>{{ task.delegate }}</td>
+                        <td>{{ task.was_delegated }}</td>
+                        <td>{{ task.due_date }}</td>
+                        <td>{{ task.task_arrived }}</td>
+                        <td>{{ task.started }}</td>
+                        <td>{{ task.comments }}</td>
+                        <td>{{ task.status }}</td>
+                        <td>
+                            <a href="{{ url_for('complete_task', task_id=task.id) }}" class="btn btn-success">Completar</a>
+                            <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <button class="btn btn-secondary" onclick="toggleCompletedTasks()">Mostrar/Ocultar Tareas Completadas</button>
+
+            <div class="completed-tasks hide-completed">
+                <h2>Tareas Completadas</h2>
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Date</th>
+                            <th>Proactive</th>
+                            <th>Project</th>
+                            <th>Priority</th>
+                            <th>Category</th>
+                            <th>Importance</th>
+                            <th>Urgency</th>
+                            <th>Action to Take</th>
+                            <th>Activity Type</th>
+                            <th>Mental Focus</th>
+                            <th>Delegate</th>
+                            <th>Was Delegated</th>
+                            <th>Due Date</th>
+                            <th>Task Arrived</th>
+                            <th>Started</th>
+                            <th>Finish</th>
+                            <th>Duration</th>
+                            <th>Duration Since Arrival</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks_completed %}
+                        <tr>
+                            <td>{{ task.day }}</td>
+                            <td>{{ task.date }}</td>
+                            <td>{{ task.proactive }}</td>
+                            <td>{{ task.project.name }}</td>
+                            <td>{{ task.priority.importance }}</td>
+                            <td>{{ task.category.name }}</td>
+                            <td>{{ task.importance.name }}</td>
+                            <td>{{ task.urgency.urgency_level }}</td>
+                            <td>{{ task.action_to_take }}</td>
+                            <td>{{ task.activity_type.activities }}</td>
+                            <td>{{ task.mental_focus.name }}</td>
+                            <td>{{ task.delegate }}</td>
+                            <td>{{ task.was_delegated }}</td>
+                            <td>{{ task.due_date }}</td>
+                            <td>{{ task.task_arrived }}</td>
+                            <td>{{ task.started }}</td>
+                            <td>{{ task.finish }}</td>
+                            <td>{{ task.duration }}</td>
+                            <td>{{ task.duration_since_arrival }}</td>
+                            <td>{{ task.comments }}</td>
+                            <td>{{ task.status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCompletedTasks() {
+            const completedTasks = document.querySelector('.completed-tasks');
+            completedTasks.classList.toggle('hide-completed');
+            completedTasks.classList.toggle('show-completed');
+        }
+    </script>
+</body>
+</html>
